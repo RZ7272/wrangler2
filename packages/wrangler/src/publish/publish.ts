@@ -303,7 +303,7 @@ See https://developers.cloudflare.com/workers/platform/compatibility-dates for m
 
 	const triggers = props.triggers || config.triggers?.crons;
 	const routes =
-		props.routes ?? config.routes ?? (config.route ? [config.route] : []) ?? [];
+		props.routes?.filter(x => typeof x === 'string' || x.disabled !== true) ?? config.routes ?? (config.route ? [config.route] : []) ?? [];
 	const routesOnly: Array<Route> = [];
 	const customDomainsOnly: Array<RouteObject> = [];
 	for (const route of routes) {
